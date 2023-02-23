@@ -1,13 +1,47 @@
 {
-  "pages":[
+  "entryPagePath": "pages/index/index",
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/jixiao/jixiao",
+    "pages/kaohe/kaohe",
+    "pages/kehu/kehu"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarTextStyle":"black"
+    "navigationBarTitleText": "绩效考核系统",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#09bb07",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "utils/icon/home.png",
+        "selectedIconPath": "utils/icon/home_green.png"
+      },
+      {
+        "pagePath": "pages/jixiao/jixiao",
+        "text": "绩效",
+        "iconPath": "utils/icon/jixiao.png",
+        "selectedIconPath": "utils/icon/jixiao_green.png"
+      },
+      {
+        "pagePath": "pages/kaohe/kaohe",
+        "text": "考核",
+        "iconPath": "utils/icon/kaohe.png",
+        "selectedIconPath": "utils/icon/kaohe_green.png"
+      },
+      {
+        "pagePath": "pages/kehu/kehu",
+        "text": "客户",
+        "iconPath": "utils/icon/kehu.png",
+        "selectedIconPath": "utils/icon/kehu_green.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
