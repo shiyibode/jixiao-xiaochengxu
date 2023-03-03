@@ -1,12 +1,23 @@
 <!--index.wxml-->
 <view class="container">
+
+  <!-- 客户信息区 -->
   <view class="userinfo">
     <block wx:if="{{canIUseOpenData}}">
-      <view class="userinfo-avatar" bindtap="bindViewTap">
-        <open-data type="userAvatarUrl"></open-data>
+      <view class="user-info-title">
+        <view class="userinfo-avatar" bindtap="bindViewTap">
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <view class="user-info-title-text">
+          <text class="user-info-title-text-class-1">7801311</text>
+          <text class="user-info-title-text-class-2">日期：{{busiDate}}</text>
+        </view>
+        <view class="user-info-title-button" class="user-info-title-switch">
+         <image src="../../utils/icon/switch.png" class="user-info-title-picture" bindtap="onSwitchTap"></image>
+        </view>
       </view>
-      <open-data type="userNickName"></open-data>
     </block>
+
     <block wx:elif="{{!hasUserInfo}}">
       <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
       <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -16,8 +27,67 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
+
+  
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <view class="seg">
+    <view class="cunkuan" hover-class="cunkuan-hover" hover-stay-time="200">
+      <view class="cunkuan-first">
+        <image src="../../utils/icon/money.png" class="cunkuan-first-money"></image>
+        <text class="cunkuan-first-text">存款绩效收入</text>
+        <image src="../../utils/icon/more.png" class="cunkuan-first-arrow"> </image>
+      </view>
+      <view class="cunkuan-second">
+        <text class="cunkuan-second-text">￥{{cunKuanIncome}}</text>
+      </view>
+      <view class="cunkuan-third">
+        <view class="cunkuan-third-line"></view>
+        <text class="cunkuan-third-text">完成存款任务数{{cunKuanCompletion}}万元</text>
+      </view>
+    </view>
+
+    <view class="daikuan" hover-class="daikuan-hover" hover-stay-time="200">
+      <view class="cunkuan-first">
+        <image src="../../utils/icon/money.png" class="cunkuan-first-money"></image>
+        <text class="cunkuan-first-text">贷款绩效收入</text>
+        <image src="../../utils/icon/more.png" class="cunkuan-first-arrow"> </image>
+      </view>
+      <view class="cunkuan-second">
+        <text class="cunkuan-second-text">￥{{daiKuanIncome}}</text>
+      </view>
+      <view class="cunkuan-third">
+        <view class="cunkuan-third-line"></view>
+        <text class="cunkuan-third-text">完成贷款利息数{{daiKuanCompletion}}万元</text>
+      </view>
+    </view>
   </view>
+
+  <view class="other">
+    <view class="other-first">
+      <image src="../../utils/icon/info.png" class="other-first-image"></image>
+      <text class="other-first-text">数据说明：此数据为未经手工调整的存贷款绩效数据，贷款绩效二次分配后，员工的绩效值将增加。</text>
+    </view>
+    <!-- <view class="other-second">
+      <button type="primary" >切换业务周期</button>
+    </view> -->
+    
+  </view>
+
+
+
+
+  <mp-dialog title="test" show="{{false}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+    <view>test content</view>
+  </mp-dialog>
+
+  <mp-actionSheet bindactiontap="actionSheetBtnClick" show="{{showActionsheet}}" actions="{{groups}}" title="请选择您的账号"></mp-actionSheet>
+
+  <picker mode="date" value="{{date}}" start="2023-01-01" end="2025-12-31" bindchange="bindDateChange">
+    <view class="picker">
+      <button type="primary" >切换业务周期</button>
+      <!-- 当前选择: {{date}} -->
+    </view>
+  </picker>
+
 </view>

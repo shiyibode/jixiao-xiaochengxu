@@ -9,7 +9,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#2ecc71",
     "navigationBarTitleText": "绩效考核系统",
     "navigationBarTextStyle": "black"
   },
@@ -19,12 +19,6 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "utils/icon/home.png",
-        "selectedIconPath": "utils/icon/home_green.png"
-      },
-      {
-        "pagePath": "pages/jixiao/jixiao",
         "text": "绩效",
         "iconPath": "utils/icon/jixiao.png",
         "selectedIconPath": "utils/icon/jixiao_green.png"
@@ -44,5 +38,9 @@
     ]
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
+  }
 }

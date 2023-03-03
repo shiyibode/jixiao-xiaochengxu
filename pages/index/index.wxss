@@ -2,18 +2,198 @@
 .userinfo {
   display: flex;
   flex-direction: column;
+  align-items: left;
+  background-color:#2ecc71;
+  height: 160rpx;
+  border-radius: 100% 100% 100% 100% / 0% 0% 18% 18%;
+}
+
+.user-info-title {
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  color: #aaa;
 }
 
 .userinfo-avatar {
   overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
+  width: 96rpx;
+  height: 96rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
 
+.user-info-title-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info-title-text-class-1{
+  font-size: 32rpx;
+  color: white;
+}
+
+.user-info-title-text-class-2{
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: white;
+}
+
+.user-info-title-switch{
+  padding-left: 280rpx;
+}
+
+.user-info-title-picture{
+  width: 50rpx;
+  height: 50rpx;
+}
+
 .usermotto {
-  margin-top: 200px;
+  margin-top: 10px;
+  padding: 0 10px;
+  color: #444;
+}
+
+.seg{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cunkuan{
+  margin-top: 40rpx;
+  background-color: white;
+  padding: 0 20rpx 40rpx 20rpx;
+  border-radius: 20rpx;
+  height: 320rpx;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cunkuan-hover{
+  margin-top: 40rpx;
+  background-color: white;
+  padding: 0 20rpx 40rpx 20rpx;
+  border-radius: 20rpx;
+  height: 320rpx;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.5;
+}
+
+.cunkuan-first{
+  padding-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.cunkuan-first-money{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.cunkuan-first-text{
+  padding-left: 10rpx;
+  color: #aaa;
+  font-size: 32rpx;
+  letter-spacing: 0.1rem;
+}
+
+.cunkuan-first-arrow{
+  padding-left: 340rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.cunkuan-second{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20rpx;
+}
+
+.cunkuan-second-money{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.cunkuan-second-text{
+  color: black;
+  font-size: 100rpx;
+  letter-spacing: -5rpx;
+}
+
+.cunkuan-third{
+  padding-top: 40rpx;
+}
+
+.cunkuan-third-line{
+  margin: 0 auto;
+  width: 620rpx;
+  height: 2rpx;
+  background-color: rgb(241, 239, 239);
+}
+
+.cunkuan-third-text{
+  padding-left: 30rpx;
+  color: #aaa;
+  font-size: 32rpx;
+  letter-spacing: normal;
+}
+
+.daikuan{
+  margin-top: 40rpx;
+  background-color: white;
+  padding: 0 20rpx 40rpx 20rpx;
+  border-radius: 20rpx;
+  height: 320rpx;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.daikuan-hover{
+  margin-top: 40rpx;
+  background-color: white;
+  padding: 0 20rpx 40rpx 20rpx;
+  border-radius: 20rpx;
+  height: 320rpx;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0.5;
+}
+
+.other{
+  padding-top: 40rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+
+.other-first{
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: left;
+}
+.other-first-image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.other-first-text{
+  padding-left: 10rpx;
+  font-size: 25rpx;
+  color: #aaa;
+}
+
+.other-second{
+  padding-top: 40rpx;
+}
+
+.picker{
+  padding-top: 40rpx;
+  padding-bottom: 123rpx;
 }
