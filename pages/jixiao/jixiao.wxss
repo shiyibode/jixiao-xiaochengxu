@@ -1,1 +1,152 @@
 /* pages/jixiao/jixiao.wxss */
+
+.jixiao{
+  padding-top: 20rpx;
+}
+
+.first{
+  padding: 0 10rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 20rpx;
+}
+
+.first-customer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.first-customer-title{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.first-customer-title-image{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.first-customer-title-text{
+  font-size: 30rpx;
+  color: #666;
+  /* padding-left: 20rpx; */
+}
+
+.first-customer-count{
+  padding-top: 0rpx;
+}
+
+.first-customer-count-text{
+  font-size: 60rpx;
+}
+
+.first-amount{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.first-amount-title{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.first-amount-title-image{
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.first-amount-title-text{
+  font-size: 30rpx;
+  color: #666;
+  /* padding-left: 20rpx; */
+}
+
+.first-amount-count{
+  padding-top: 0rpx;
+}
+
+.first-amount-count-text{
+  font-size: 60rpx;
+}
+
+.separator{
+  height: 0rpx;
+  background-color: #ecf0f1;
+}
+
+.second{
+  display: flex;
+  flex-direction: column;
+  padding: 0 20rpx;
+}
+
+.second-search{
+  margin-left: -20rpx;
+  margin-right: -20rpx;
+}
+
+.second-cunkuan{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 40rpx 20rpx 20rpx;
+}
+
+.cunkuan-customer{
+  display: flex;
+  flex-direction: column;
+}
+
+.cunkuan-customer-name{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.cunkuan-customer-name-name{
+  font-size: 40rpx;
+}
+
+.cunkuan-customer-name-identity{
+  font-size: 25rpx;
+  color: #666;
+  padding-left: 20rpx;
+}
+
+.cunkuan-customer-amount-text{
+  color: #666;
+}
+
+.cunkuan-customer-amount-value{
+  padding-left: 20rpx;
+  color: #e67e22;
+}
+
+.cunkuan-customer-salary-text{
+  color: #666;
+}
+
+.cunkuan-customer-salary-value{
+  padding-left: 20rpx;
+  color: #16a085;
+}
+
+.cunkuan-phone{
+
+}
+
+.cunkuan-phone-image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.delimiter{
+  height: 2rpx;
+  background-color: #ecf0f1;
+}

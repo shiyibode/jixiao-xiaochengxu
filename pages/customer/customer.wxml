@@ -1,0 +1,326 @@
+<!--pages/customer/customer.wxml-->
+<view class="customer">
+  <view class="first">
+    <image src="../../utils/icon/customer_single.png" class="first-image" wx:if="{{genderFlag === 0}}"></image>
+    <image src="../../utils/icon/customer_women.png" class="first-image" wx:if="{{genderFlag === 1}}"></image>
+    <text class="first-text">张三三</text>
+  </view>
+
+  <view class="separator"></view>
+
+
+  <view class="one">
+    <view class="second-title">
+      <image src="../../utils/icon/cunkuan.png" class="second-title-image"></image>
+      <text class="second-title-text">贡献绩效</text>
+    </view>
+    <!-- <view class="delimiter"></view> -->
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">0.35以下利率存款</text>
+        <text class="second-content-account-number">122.5</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">0.35至1.35利率存款</text>
+        <text class="second-content-account-number">1809.23</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">1.35至3.0利率存款</text>
+        <text class="second-content-account-number">65.35</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">3.0以上利率存款</text>
+        <text class="second-content-account-number">2.5</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">千万元以下授信贷款</text>
+        <text class="second-content-account-number">655.2</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">政策性贷款</text>
+        <text class="second-content-account-number">25.7</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+  </view>
+
+  <view class="second">
+    <view class="second-title">
+      <image src="../../utils/icon/cunkuan.png" class="second-title-image"></image>
+      <text class="second-title-text">存款</text>
+    </view>
+    <!-- <view class="delimiter"></view> -->
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">存款金额</text>
+        <text class="second-content-account-number">25584456.25</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">存款账户数</text>
+        <text class="second-content-account-number">6个</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">不动户账户数</text>
+        <text class="second-content-account-number">2个</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">当日动账次数</text>
+        <text class="second-content-account-number">8次</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">当日支出金额</text>
+        <text class="second-content-account-number">280000.25</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">当日收入金额</text>
+        <text class="second-content-account-number">428548.00</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">当日三方交易次数</text>
+        <text class="second-content-account-number">12次</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+    
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">即将到期存款账户1</text>
+        <text class="second-content-account-number">***2332154</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">即将到期存款账户2</text>
+        <text class="second-content-account-number">***89556</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">当日存款利息支出</text>
+        <text class="second-content-account-number">885.12</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+  </view>
+
+
+  <view class="third">
+    <view class="third-title">
+      <image src="../../utils/icon/cunkuan.png" class="third-title-image"></image>
+      <text class="third-title-text">贷款</text>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">授信金额</text>
+        <text class="second-content-account-number">990000</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">贷款余额</text>
+        <text class="second-content-account-number">200000</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">客户五级分类状态</text>
+        <text class="second-content-account-number">0002</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">欠息金额</text>
+        <text class="second-content-account-number">5864.23</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">即将到期贷款1</text>
+        <text class="second-content-account-number">***566584</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">即将到期贷款2</text>
+        <text class="second-content-account-number">***568117</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+  </view>
+
+  <view class="fourth">
+    <view class="fourth-title">
+      <image src="../../utils/icon/cunkuan.png" class="fourth-title-image"></image>
+      <text class="fourth-title-text">其他</text>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">开通手机银行</text>
+        <text class="second-content-account-number">是</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">开通网银</text>
+        <text class="second-content-account-number">否</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">开通社保卡</text>
+        <text class="second-content-account-number">是</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">绑定了三方支付</text>
+        <text class="second-content-account-number">是</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-desc">开通短信通</text>
+        <text class="second-content-account-number">否</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+  </view>
+
+  <view class="fourth">
+    <view class="fourth-title">
+      <image src="../../utils/icon/cunkuan.png" class="fourth-title-image"></image>
+      <text class="fourth-title-text">备注</text>
+    </view>
+
+    <view wx:for="{{remarksList}}" class="second-content" wx:for-item="itemName">
+      <view class="second-content-account">
+        <text class="second-content-account-number">{{itemName.content}}</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <!-- <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-number">2023年给客户送礼价值100元</text>
+      </view>
+      <view class="delimiter"></view>
+    </view>
+
+    <view class="second-content">
+      <view class="second-content-account">
+        <text class="second-content-account-number">该客户在政府上班，是个副科级干部，家住在康巴什皇庭俊景</text>
+      </view>
+      <view class="delimiter"></view>
+    </view> -->
+
+    <view class="fourth-add-remarks" hover-class="fourth-add-remarks-hover" hover-stay-time="200" bindtap="onAddNewRemarksTap">
+      <text class="fourth-add-remarks-text">+ 添加新备注</text>
+    </view>
+  </view>
+
+  <view class="fiveth">
+    <view class="other">
+      <view class="other-first">
+        <view class='image-box'> 
+          <image src="../../utils/icon/info.png" class="other-first-image"></image>  
+        </view>
+        <view class="text-box">
+          <text class="other-first-text">数据说明：当前业务日为 <text class="text-bold">{{currentBusiDate}}</text> 日，可点击下方的按钮切换业务日。绩效数据为未经手工调整的存贷款绩效数据，存款绩效可能会被手工调整，贷款绩效未包含二次分配的绩效。</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="picker">
+      <picker mode="date" value="{{date}}" start="2023-01-01" end="2025-12-31" bindchange="bindDateChange" value="{{currentBusiDate}}">
+          <button type="primary" size="mini">切换日期</button>
+      </picker>
+      <view>
+        <button type="primary" size="mini" bindtap="onContactCustomerBtnTap">联系客户</button>
+      </view>
+    </view>
+
+    <mp-dialog 
+      title="添加备注" 
+      show="{{show}}" 
+      buttons="{{buttons}}"
+      bindbuttontap="tapDialogButton"
+      ext-class=""
+      >
+      <textarea placeholder="请输入您对该客户的备注信息" class="remarks" fixed="{{true}}" bindinput="onRemarksConfirm"></textarea>
+    </mp-dialog>
+
+  </view>
+
+
+</view>

@@ -5,7 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showActionsheet: false,
+    groups: [
+        { text: '7801311', value: '7801311' },
+        { text: '103369', value: '103369' }
+    ],
+    busiDate: '2023-02-23',
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+    havePhoneNumberFlag: false,
+    currentCustomerName: null,
+    callConfirmDialogShow: false,
+    confirmDialogButtons:[
+      {text: '取消'},
+      {text: '确认'}
+    ]
   },
 
   /**
@@ -13,6 +26,51 @@ Page({
    */
   onLoad(options) {
 
+  },
+
+  onSwitchTap(){
+    this.setData({
+      showActionsheet: true
+    });
+  },
+
+  actionSheetBtnClick(e){
+    let selectedTeller = e.detail.value;
+    console.log('选择的账号是: '+selectedTeller);
+    this.setData({
+      showActionsheet: false
+    });
+  },
+
+  onPhoneTap(e){
+    this.setData({
+      currentCustomerName: '张三三',
+      callConfirmDialogShow: true
+    });
+  },
+
+  onConfirmDialogClose(e){
+    this.setData({
+      currentCustomerName: null,
+      callConfirmDialogShow: false
+    });
+  },
+
+  confirmDialogButtonTap(e){
+    let btnIndex = e.detail.index;
+    if(btnIndex === 0){
+      
+    }
+    else{
+      wx.makePhoneCall({
+        phoneNumber: '15391257468',
+      });
+
+    }
+
+    this.setData({
+      callConfirmDialogShow: false
+    });
   },
 
   /**

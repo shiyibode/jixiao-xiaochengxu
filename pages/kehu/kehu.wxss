@@ -1,1 +1,146 @@
 /* pages/kehu/kehu.wxss */
+.kehu{
+  background-color: #ecf0f1;
+  padding-bottom: 180rpx;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  background-color:#2ecc71;
+  height: 160rpx;
+  border-radius: 100% 100% 100% 100% / 0% 0% 18% 18%;
+}
+
+.user-info-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  overflow: hidden;
+  width: 96rpx;
+  height: 96rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.user-info-title-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info-title-text-class-1{
+  font-size: 32rpx;
+  color: white;
+}
+
+.user-info-title-text-class-2{
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  color: white;
+}
+
+.user-info-title-switch{
+  padding-left: 280rpx;
+}
+
+.user-info-title-picture{
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.usermotto {
+  margin-top: 10px;
+  padding: 0 10px;
+  color: #444;
+}
+
+.content{
+  background-color: white;
+}
+
+.one{
+  
+}
+
+.second{
+  padding: 0 20rpx;
+}
+
+.image-box{
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-tellephone-image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.second-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ecf0f1;
+  padding-bottom: 5rpx;
+  /* margin-left: -20rpx;
+  margin-right: -20rpx */
+}
+
+.content-title-image-box{
+  padding-left: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.second-title-image{
+  /* padding-left: 20rpx; */
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.second-title-text{
+  padding-left: 10rpx;
+  font-size: 30rpx;
+  font-weight: bolder;
+}
+
+.delimiter{
+  height: 3rpx;
+  background-color: #ecf0f1;
+  margin-top: 20rpx;
+}
+
+.second-content{
+
+}
+
+.second-content-account{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 20rpx 0rpx 20rpx;
+}
+
+.second-content-account-desc{
+  font-size: 30rpx;
+  font-weight: 900;
+  color: #999;
+}
+
+.second-content-account-number{
+  /* padding-left: 40rpx; */
+}
+
+.sepator{
+  background-color: #ecf0f1;
+  height: 20rpx;
+}

@@ -1,2 +1,151 @@
 <!--pages/jixiao/jixiao.wxml-->
-<text>pages/jixiao/jixiao.wxml</text>
+<view class="jixiao">
+
+  <view class="first">
+    <view class="first-customer">
+      <view class="first-customer-title">
+        <image src="../../utils/icon/customer.png" class="first-customer-title-image"></image>
+        <text class="first-customer-title-text">有效客户</text>
+      </view>
+      <view class="first-customer-count">
+        <text class="first-customer-count-text">{{cunKuanCustomerCnt}}户</text>
+      </view>
+    </view>
+
+    <view class="first-amount">
+      <view class="first-amount-title">
+        <image src="../../utils/icon/cunkuan_amount.png" class="first-amount-title-image"></image>
+        <text class="first-amount-title-text">总存款数</text>
+      </view>
+      <view class="first-amount-count">
+        <text class="first-amount-count-text">{{cunKuanAmount}}万</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="separator"></view>
+
+  <view class="second">
+
+    <view class="second-search">
+      <mp-searchbar placeholder="姓名或核心客户号"></mp-searchbar>
+    </view>
+
+    <view class="second-cunkuan">
+      <view class="cunkuan-customer" bindtap="onCustomerTap" data-customerno="08515484">
+        <view class="cunkuan-customer-name">
+          <text class="cunkuan-customer-name-name">张三三</text>
+          <text class="cunkuan-customer-name-identity">152728***3913</text>
+        </view>
+        <view class="cunkuan-customer-amount">
+          <text class="cunkuan-customer-amount-text">贡献存款: <text class="cunkuan-customer-amount-value">2255455.32元</text></text>
+        </view>
+        <view class="cunkuan-customer-salary">
+          <text class="cunkuan-customer-salary-text">贡献绩效:<text class="cunkuan-customer-salary-value">182.37元</text></text>
+        </view>
+      </view>
+      <view class="cunkuan-phone">
+        <image src="../../utils/icon/telephone.png" class="cunkuan-phone-image" bindtap="onTelephoneTap" data-phonenumber="15391257468"></image>
+      </view>
+    </view>
+    <view class="delimiter"></view>
+
+
+    <view class="second-cunkuan">
+      <view class="cunkuan-customer">
+        <view class="cunkuan-customer-name">
+          <text class="cunkuan-customer-name-name">李思思</text>
+          <text class="cunkuan-customer-name-identity">152728***3913</text>
+        </view>
+        <view class="cunkuan-customer-amount">
+          <text class="cunkuan-customer-amount-text">贡献存款: <text class="cunkuan-customer-amount-value">2255455.32元</text></text>
+        </view>
+        <view class="cunkuan-customer-salary">
+          <text class="cunkuan-customer-salary-text">贡献绩效:<text class="cunkuan-customer-salary-value">182.37元</text></text>
+        </view>
+      </view>
+      <view class="cunkuan-phone">
+        <image src="../../utils/icon/telephone.png" class="cunkuan-phone-image"></image>
+      </view>
+    </view>
+    <view class="delimiter"></view>
+
+    <view class="second-cunkuan">
+      <view class="cunkuan-customer">
+        <view class="cunkuan-customer-name">
+          <text class="cunkuan-customer-name-name">王五五</text>
+          <text class="cunkuan-customer-name-identity">152728***3913</text>
+        </view>
+        <view class="cunkuan-customer-amount">
+          <text class="cunkuan-customer-amount-text">贡献存款: <text class="cunkuan-customer-amount-value">2255455.32元</text></text>
+        </view>
+        <view class="cunkuan-customer-salary">
+          <text class="cunkuan-customer-salary-text">贡献绩效: <text class="cunkuan-customer-salary-value">182.37元</text></text>
+        </view>
+      </view>
+      <view class="cunkuan-phone">
+        <image src="../../utils/icon/telephone.png" class="cunkuan-phone-image"></image>
+      </view>
+    </view>
+    <view class="delimiter"></view>
+
+    <view class="second-cunkuan">
+      <view class="cunkuan-customer">
+        <view class="cunkuan-customer-name">
+          <text class="cunkuan-customer-name-name">赵六六</text>
+          <text class="cunkuan-customer-name-identity">152728***3913</text>
+        </view>
+        <view class="cunkuan-customer-amount">
+          <text class="cunkuan-customer-amount-text">贡献存款: <text class="cunkuan-customer-amount-value">2255455.32元</text></text>
+        </view>
+        <view class="cunkuan-customer-salary">
+          <text class="cunkuan-customer-salary-text">贡献绩效: <text class="cunkuan-customer-salary-value">182.37元</text></text>
+        </view>
+      </view>
+      <view class="cunkuan-phone">
+        <image src="../../utils/icon/telephone.png" class="cunkuan-phone-image"></image>
+      </view>
+    </view>
+    <view class="delimiter"></view>
+
+    <view class="second-cunkuan">
+      <view class="cunkuan-customer">
+        <view class="cunkuan-customer-name">
+          <text class="cunkuan-customer-name-name">吴七七</text>
+          <text class="cunkuan-customer-name-identity">152728***3913</text>
+        </view>
+        <view class="cunkuan-customer-amount">
+          <text class="cunkuan-customer-amount-text">贡献存款: <text class="cunkuan-customer-amount-value">2255455.32元</text></text>
+        </view>
+        <view class="cunkuan-customer-salary">
+          <text class="cunkuan-customer-salary-text">贡献绩效: <text class="cunkuan-customer-salary-value">182.37元</text></text>
+        </view>
+      </view>
+      <view class="cunkuan-phone">
+        <image src="../../utils/icon/telephone.png" class="cunkuan-phone-image"></image>
+      </view>
+    </view>
+    <view class="delimiter"></view>
+
+    <view class="second-cunkuan">
+      <view class="cunkuan-customer">
+        <view class="cunkuan-customer-name">
+          <text class="cunkuan-customer-name-name">吴七七</text>
+          <text class="cunkuan-customer-name-identity">152728***3913</text>
+        </view>
+        <view class="cunkuan-customer-amount">
+          <text class="cunkuan-customer-amount-text">贡献存款: <text class="cunkuan-customer-amount-value">2255455.32元</text></text>
+        </view>
+        <view class="cunkuan-customer-salary">
+          <text class="cunkuan-customer-salary-text">贡献绩效: <text class="cunkuan-customer-salary-value">182.37元</text></text>
+        </view>
+      </view>
+      <view class="cunkuan-phone">
+        <image src="../../utils/icon/telephone.png" class="cunkuan-phone-image"></image>
+      </view>
+    </view>
+    <view class="delimiter"></view>
+
+  </view>
+
+</view>

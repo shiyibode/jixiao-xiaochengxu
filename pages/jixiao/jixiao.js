@@ -5,14 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    resData: null
+    resData: null,
+    cunKuanCustomerCnt: 223,
+    cunKuanAmount: 2334
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-
+    console.log(options);
   },
 
   /**
@@ -38,6 +40,29 @@ Page({
       }
     })
 
+  },
+
+  onCustomerTap(e){
+    let customerNo = e.currentTarget.dataset.customerno;
+    
+    if(customerNo !== null){
+      let url = '../customer/customer?customerno='+customerNo;
+      wx.navigateTo({
+        url: url,
+      })
+    }
+  },
+
+
+  onTelephoneTap(e){
+    let phoneNumber = e.currentTarget.dataset.phonenumber;
+    
+    if(phoneNumber.length === 11){
+      console.log(phoneNumber);
+      wx.makePhoneCall({
+        phoneNumber: phoneNumber,
+      })
+    }
   },
 
   /**

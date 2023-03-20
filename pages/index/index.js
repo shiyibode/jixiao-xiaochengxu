@@ -4,12 +4,13 @@ const app = getApp()
 
 Page({
   data: {
+    getUserInfoDialogShowFlag: false,
+    avatarUrl: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132',
     showActionsheet: false,
     groups: [
         { text: '7801311', value: '7801311' },
         { text: '103369', value: '103369' }
     ],
-    motto: '亲爱的员工兰慧，您在2023-02-04业务日的绩效考核明细如下：',
     busiDate: '2023-02-23',
     date: null,
     tellerName: '兰慧',
@@ -21,9 +22,7 @@ Page({
     buttons: [{text: '取消'}, {text: '确认'}],
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    canIUse: wx.canIUse('button.open-type.chooseAvatar')
   },
   // 事件处理函数
   bindViewTap() {
@@ -36,11 +35,19 @@ Page({
       showActionsheet: true
     });
   },
-//   close: function () {
-//     this.setData({
-//         showActionsheet: false
-//     })
-// },
+
+  /**
+   * 调用授权获取用户微信头像时的回调函数
+   */
+  getUserInfo(e){
+    this.updateAvatar(e.detail.avatarUrl);  //更新应用服务端数据库中用户的头像地址，下次登录时直接从数据库中取，不需要再让用户授权来获取头像地址
+    this.setData({
+      getUserInfoDialogShowFlag: false,
+      avatarUrl: e.detail.avatarUrl
+    });
+
+  },
+
   actionSheetBtnClick(e){
     let selectedTeller = e.detail.value;
     this.setData({
@@ -53,24 +60,103 @@ Page({
       date: e.detail.value
     })
   },
-  onLoad() {
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true
+
+  onSegTap:function(e){
+    let id = e.currentTarget.id;
+    console.log(e);
+    if(id === 'cunkuan'){
+      wx.navigateTo({
+        url: '../jixiao/jixiao?id=cunkuan',
+      })
+    }
+    if(id === 'daikuan'){
+      wx.navigateTo({
+        url: '../jixiao/jixiao?id=daikuan',
       })
     }
   },
-  getUserProfile(e) {
-    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-    wx.getUserProfile({
-      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
+
+  onLoad() {
+    
+  },
+
+   /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+    let me = this;
+
+    //判断app.js中的wx.login是否已经拿到openId，共等待3秒钟，如果等待3秒钟还没有拿到则重新登录
+    //如果拿到了openId，就使用openId去应用服务端获取用户的avatarUrl地址
+    if(app.globalData.openId === null || app.globalData.openId === undefined){
+      let flag = true;
+      setTimeout(res=>{
+        if(app.globalData.openId !== null && app.globalData.openId !== undefined) flag = false;
+        if(flag){
+          setTimeout(res2=>{
+            if(app.globalData.openId === null || app.globalData.openId === undefined){
+              app.login();
+            }
+            else{
+              me.getAvatar();
+            }
+          },2000);
+        }
+        else{
+          me.getAvatar();
+        }
+      },1000);
+    }
+    else{
+      me.getAvatar();
+    }
+    
+  },
+
+  /**
+   * 根据openId去应用服务器取avatarUrl
+   * 如果服务器端未保存该openId对应的avatarUrl，就显示授权获取头像的窗口
+   */
+  getAvatar(){
+    let me = this;
+    wx.request({
+      url: app.globalData.globalPath + 'haveavatar',
+      data:{openId : app.globalData.openId},
+      success(res){
+        if(res.data.haveAvatar === true){
+          me.setData({
+            avatarUrl: res.data.url
+          });
+        }
+        else{
+          me.setData({
+            getUserInfoDialogShowFlag: true
+          });
+        }
+      },
+      fail(e){
+        console.log('获取用户openId失败：' + e);
+      }
+    })
+  },
+
+  /**
+   * 更新服务端保存的头像地址
+   */
+  updateAvatar(avatarUrl){
+    wx.request({
+      url: app.globalData.globalPath + 'updateavatar',
+      data:{
+        openId: app.globalData.openId,
+        avatarUrl: avatarUrl
+      },
+      success(res){
+        console.log(res.data.info);
       }
     })
   }
+
+
+
+
 })

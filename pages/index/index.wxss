@@ -22,6 +22,11 @@
   border-radius: 50%;
 }
 
+.userinfo-avatar-image{
+  width: 96rpx;
+  height: 96rpx;
+}
+
 .user-info-title-text{
   display: flex;
   flex-direction: column;

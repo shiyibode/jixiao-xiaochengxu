@@ -2,10 +2,10 @@
   "entryPagePath": "pages/index/index",
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/jixiao/jixiao",
     "pages/kaohe/kaohe",
-    "pages/kehu/kehu"
+    "pages/kehu/kehu",
+    "pages/customer/customer"
   ],
   "window": {
     "backgroundTextStyle": "light",

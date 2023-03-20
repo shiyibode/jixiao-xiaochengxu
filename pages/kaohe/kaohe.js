@@ -5,7 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tabIndex: 0,
+    tabList: [{
+      text: '员工',
+      iconPath: '/utils/icon/employee.png',
+      selectedIconPath: '/utils/icon/employee_green.png'
+    },{
+      text: '机构',
+      iconPath: '/utils/icon/company.png',
+      selectedIconPath: '/utils/icon/company_green.png'
+    }]
   },
 
   /**
@@ -13,6 +22,13 @@ Page({
    */
   onLoad(options) {
 
+  },
+
+  onTabSwitch(e) {
+    console.log(e.detail.index);
+    this.setData({
+      tabIndex: e.detail.index
+    });
   },
 
   /**
