@@ -1,4 +1,5 @@
 // pages/kaohe/kaohe.js
+var appInstance = getApp()
 Page({
 
   /**
@@ -7,14 +8,17 @@ Page({
   data: {
     tabIndex: 0,
     tabList: [{
-      text: '员工',
-      iconPath: '/utils/icon/employee.png',
-      selectedIconPath: '/utils/icon/employee_green.png'
-    },{
       text: '机构',
       iconPath: '/utils/icon/company.png',
       selectedIconPath: '/utils/icon/company_green.png'
-    }]
+    },{
+      text: '员工',
+      iconPath: '/utils/icon/employee.png',
+      selectedIconPath: '/utils/icon/employee_green.png'
+    }],
+
+    orgPlanList:[]
+
   },
 
   /**
@@ -42,6 +46,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
+    let me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest'),
+        localTellerCode = wx.getStorageSync('tellerCode'),
+        localBusiDate = wx.getStorageSync('busiDate');
+
+    wx.request({
+      url: appInstance.globalData.globalPath + 'orgkaohelist',
+      data:{
+        sessionKeyDigest : localSessionKeyDigest,
+        tellerCode: localTellerCode,
+        busiDate: localBusiDate
+      },
+      success(res){
+        me.setData({
+          orgPlanList: res.data.info
+        })
+      }
+    })
+
+    console.log('onshow: '+localTellerCode);
+
 
   },
 

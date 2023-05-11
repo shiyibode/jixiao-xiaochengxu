@@ -202,3 +202,23 @@
   padding-top: 40rpx;
   padding-bottom: 123rpx;
 }
+
+.picker-class{
+  /* background-color: red; */
+  /* padding-bottom: -100rpx; */
+  padding-top: 60rpx;
+  padding-bottom: 100rpx;
+}
+
+.picker-btn{
+  background-color: #07C160;
+  margin-left: 220rpx;
+  margin-right: 220rpx;
+  font-size: 32rpx;
+  text-align: center;
+  color: white;
+  font-weight: 550;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+  border-radius: 10rpx;
+}

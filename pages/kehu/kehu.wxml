@@ -3,36 +3,24 @@
 
   <!-- 客户信息区 -->
   <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}">
-      <view class="user-info-title">
-        <view class="userinfo-avatar" bindtap="bindViewTap">
-          <open-data type="userAvatarUrl"></open-data>
-        </view>
-        <view class="user-info-title-text">
-          <text class="user-info-title-text-class-1">7801311</text>
-          <text class="user-info-title-text-class-2">日期：{{busiDate}}</text>
-        </view>
-        <view class="user-info-title-button" class="user-info-title-switch">
-         <image src="../../utils/icon/switch.png" class="user-info-title-picture" bindtap="onSwitchTap"></image>
-        </view>
+    <view class="user-info-title">
+      <view class="userinfo-avatar" bindtap="bindViewTap">
+        <image src="{{avatarUrl}}" class="userinfo-avatar-image"></image>
       </view>
-    </block>
-
-    <block wx:elif="{{!hasUserInfo}}">
-      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
-    </block>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+      <view class="user-info-title-text">
+        <text class="user-info-title-text-class-1">{{tellerCode}}</text>
+        <text class="user-info-title-text-class-2">日期：{{busiDate}}</text>
+      </view>
+      <view class="user-info-title-button" class="user-info-title-switch">
+        <image src="../../utils/icon/switch.png" class="user-info-title-picture" bindtap="onSwitchTap"></image>
+      </view>
+    </view>
   </view>
 
 
   <view class="content">
     
-    <view class="one">
+    <view class="one" wx:if="{{expireCunKuanList.length > 0}}">
       <view class="sepator"></view>
       <view class="second-title">
         <view class="content-title-image-box">
@@ -41,37 +29,21 @@
         <text class="second-title-text">到期存款</text>
       </view>
     
-      <view class="second-content">
-        <view class="second-content-account">
-          <text class="second-content-account-desc">客户张三三有2000000.21元存款将于2023-04-10日到期</text>
-          <view class="image-box" wx:if="{{havePhoneNumberFlag}}">
-            <image src="../../utils/icon/telephone.png" class="content-tellephone-image"></image>
+      <view wx:for="{{expireCunKuanList}}" wx:key="accountNo">
+        <view class="second-content">
+          <view class="second-content-account">
+            <text class="second-content-account-desc">{{item.cunKuanExpireAcct}}</text>
+            <view class="image-box" wx:if="{{item.cellphoneNumber != null}}">
+              <image src="../../utils/icon/telephone.png" class="content-tellephone-image" bindtap="onCallTap" data-cellphone="{{item.cellphoneNumber}}"></image>
+            </view>
           </view>
+          <view class="delimiter"></view>
         </view>
-        <view class="delimiter"></view>
-      </view>
-
-      <view class="second-content">
-        <view class="second-content-account">
-          <text class="second-content-account-desc">0.35以下利率存款</text>
-          <view class="image-box" wx:if="{{true}}" bindtap="onPhoneTap">
-            <image src="../../utils/icon/telephone.png" class="content-tellephone-image"></image>
-          </view>
-        </view>
-        <view class="delimiter"></view>
-      </view>
-
-      <view class="second-content">
-        <view class="second-content-account">
-          <text class="second-content-account-desc">0.35以下利率存款</text>
-          <image src="../../utils/icon/telephone.png" class="content-tellephone-image"></image>
-        </view>
-        <view class="delimiter"></view>
       </view>
 
     </view>
 
-    <view class="one">
+    <view class="one" wx:if="{{expireDaiKuanList.length > 0}}">
       <view class="sepator"></view>
       <view class="second-title">
         <view class="content-title-image-box">
@@ -79,39 +51,72 @@
         </view>
         <text class="second-title-text">到期贷款</text>
       </view>
-    
-      <view class="second-content">
-        <view class="second-content-account">
-          <text class="second-content-account-desc">客户张三三有2000000.21元存款将于2023-04-10日到期</text>
-          <view class="image-box">
-            <image src="../../utils/icon/telephone.png" class="content-tellephone-image"></image>
+
+      <view wx:for="{{expireDaiKuanList}}" wx:key="accountNo">
+        <view class="second-content">
+          <view class="second-content-account">
+            <text class="second-content-account-desc">{{item.daiKuanExpireAcct}}</text>
+            <view class="image-box">
+              <image src="../../utils/icon/telephone.png" class="content-tellephone-image" bindtap="onCallTap" data-cellphone="{{item.cellphoneNumber}}"></image>
+            </view>
           </view>
+          <view class="delimiter"></view>
         </view>
-        <view class="delimiter"></view>
-      </view>
-
-      <view class="second-content">
-        <view class="second-content-account">
-          <text class="second-content-account-desc">0.35以下利率存款</text>
-          <image src="../../utils/icon/telephone.png" class="content-tellephone-image"></image>
-        </view>
-        <view class="delimiter"></view>
-      </view>
-
-      <view class="second-content">
-        <view class="second-content-account">
-          <text class="second-content-account-desc">0.35以下利率存款</text>
-          <image src="../../utils/icon/telephone.png" class="content-tellephone-image"></image>
-        </view>
-        <view class="delimiter"></view>
       </view>
     </view>
+
+    <view class="one" wx:if="{{newOpenAccount.length > 0}}">
+      <view class="sepator"></view>
+      <view class="second-title">
+        <view class="content-title-image-box">
+          <image src="../../utils/icon/list.png" class="second-title-image"></image>
+        </view>
+        <text class="second-title-text">新增存贷款</text>
+      </view>
+
+      <view wx:for="{{newOpenAccount}}" wx:key="accountNo">
+        <view class="second-content">
+          <view class="second-content-account">
+            <text class="second-content-account-desc">{{item.describe}}</text>
+            <!-- <view class="image-box">
+              <image src="../../utils/icon/telephone.png" class="content-tellephone-image" bindtap="onCallTap" data-cellphone="{{item.cellphoneNumber}}"></image>
+            </view> -->
+          </view>
+          <view class="delimiter"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="one" wx:if="{{overdueLoanCustomer.length > 0}}">
+      <view class="sepator"></view>
+      <view class="second-title">
+        <view class="content-title-image-box">
+          <image src="../../utils/icon/list.png" class="second-title-image"></image>
+        </view>
+        <text class="second-title-text">不良贷款</text>
+      </view>
+
+      <view wx:for="{{overdueLoanCustomer}}" wx:key="cellphoneNumber">
+        <view class="second-content">
+          <view class="second-content-account">
+            <text class="second-content-account-desc">{{item.describe}}</text>
+            <view class="image-box">
+              <image src="../../utils/icon/telephone.png" class="content-tellephone-image" bindtap="onCallTap" data-cellphone="{{item.cellphoneNumber}}"></image>
+            </view>
+          </view>
+          <view class="delimiter"></view>
+        </view>
+      </view>
+    </view>
+
+
 
   </view>
 
 
-
-
+  <mp-dialog title="错误信息" show="{{errorDialogShow}}" bindbuttontap="tapDialogButton" buttons="{{dialogButtons}}">
+    <text>{{errorMessage}}</text>
+  </mp-dialog>
 
 
   <mp-dialog title="呼叫客户{{currentCustomerName}}？" show="{{callConfirmDialogShow}}" bindclose="onConfirmDialogClose" buttons="{{confirmDialogButtons}}" bindbuttontap="confirmDialogButtonTap"></mp-dialog>

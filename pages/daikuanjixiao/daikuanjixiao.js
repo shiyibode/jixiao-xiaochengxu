@@ -31,10 +31,11 @@ Page({
         localTellerCode = wx.getStorageSync('tellerCode'),
         localBusiDate = wx.getStorageSync('busiDate');
 
-    if(options.id === 'cunkuan'){
+
+    if(options.id === 'daikuan'){
 
       wx.request({
-        url: appInstance.globalData.globalPath + 'cunkuandescribeinfo',
+        url: appInstance.globalData.globalPath + 'daikuandescribeinfo',
         data:{
           sessionKeyDigest : localSessionKeyDigest,
           tellerCode: localTellerCode,
@@ -42,15 +43,14 @@ Page({
         },
         success(res){
           me.setData({
-            cunKuanCustomerCnt: res.data.info.cunKuanCustomerCnt,
-            cunKuanAmount: res.data.info.cunKuanTaskCompletion
+            cunKuanCustomerCnt: res.data.info.daiKuanCustomerCnt,
+            cunKuanAmount: res.data.info.daiKuanTaskCompletion
           });
         }
       })
-
-      //获取存款客户列表
+      //获取贷款客户列表
       wx.request({
-        url: appInstance.globalData.globalPath + 'cunkuancustomerlist',
+        url: appInstance.globalData.globalPath + 'daikuancustomerlist',
         data:{
           sessionKeyDigest : localSessionKeyDigest,
           tellerCode: localTellerCode,
@@ -58,13 +58,13 @@ Page({
           pageNo: me.data.currentPageNo
         },
         success(res){
-          console.log(res)
           me.setData({
             customerList: res.data.customerList,
             totalPage: res.data.customerTotalPage
           });
         }
       })
+
     }
 
   },
@@ -99,7 +99,7 @@ Page({
   onTelephoneTap(e){
     let phoneNumber = e.currentTarget.dataset.phonenumber;
     
-    if(phoneNumber != null && phoneNumber.length === 11){
+    if(phoneNumber.length === 11){
       console.log(phoneNumber);
       wx.makePhoneCall({
         phoneNumber: phoneNumber,
@@ -118,7 +118,7 @@ Page({
         localBusiDate = wx.getStorageSync('busiDate');
 
     console.log('触底了,总页数: '+me.data.totalPage);
-    if(me.data.cunDaiKuanFlag === 'cunkuan'){
+    if(me.data.cunDaiKuanFlag === 'daikuan'){
       let currentPage = this.data.currentPageNo + 1;  //第一个页面已在onReady中加载，触底只需要从第二个页面开始加载
       if(currentPage > me.data.totalPage){
         me.setData({
@@ -133,7 +133,7 @@ Page({
         console.log('获取页面：'+ currentPage);
         //获取客户列表
         wx.request({
-          url: appInstance.globalData.globalPath + 'cunkuancustomerlist',
+          url: appInstance.globalData.globalPath + 'daikuancustomerlist',
           data:{
             sessionKeyDigest : localSessionKeyDigest,
             tellerCode: localTellerCode,

@@ -8,11 +8,11 @@ App({
     var app = this;
 
     // 登录
-    app.login();
+    // app.login();
 
 
     //企业微信登录
-    
+    app.qyLogin();
   },
 
   login(){
@@ -36,11 +36,19 @@ App({
     })
   },
 
+  qyLogin(){
+    let app = this;
+    // wx.navigateTo({
+    //   url: './pages/login/login?scene=0',
+    // })
+  },
+
 
 
   globalData: {
-    openId: null,
-    userInfo: null,
-    globalPath: 'http://192.168.31.249:8080/'
+    // openId: null,
+    // userInfo: null,
+    // globalPath: 'http://192.168.31.249:8080/'
+    globalPath: 'https://tzrr.ordosrcb.com/jixiao/'
   }
 })

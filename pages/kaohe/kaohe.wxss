@@ -15,12 +15,14 @@
 
 .employee-plan{
   padding-top: 20rpx;
+  background-color: #ecf0f1;
 }
 
 .employee-plan-title{
   display: flex;
   flex-direction: row;
   padding-left: 20rpx;
+  
 }
 
 .employee-plan-title-image{
@@ -76,4 +78,18 @@
 .delimiter{
   background-color: #ecf0f1;
   height: 3rpx;
+}
+
+.complete-text{
+  color: green;
+}
+
+.un-complete-text{
+  color: red;
+}
+
+.complete-flag-text{
+  font-size: 30rpx;
+  font-weight: 700;
+  text-align: right;
 }

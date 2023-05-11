@@ -1,11 +1,12 @@
 // pages/customer/customer.js
+var appInstance = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentBusiDate: '2023-03-05',
+    currentBusiDate: '',
     customerNo: null,
     show: false,
     buttons: [
@@ -23,66 +24,18 @@ Page({
         }
     ],
     remarksList:[
-      {
-        content: '2023年给客户送礼价值100元'
-      },
-      {
-        content: '该客户在政府上班，是个副科级干部，家住在康巴什皇庭俊景'
-      }
+      
     ],
     newRemarks: null,
-    genderFlag: 0
-
+    customerName: '',
+    sex: '',
+    cellphoneNumber:'',
+    incomeList: [],
+    cunKuanInfo: [],
+    daiKuanInfo: [],
+    otherInfo: []
   },
 
-  open: function () {
-    this.setData({
-        show: true
-    })
-  },
-  buttontap(e) {
-      console.log(e.detail)
-  },
-
-  onAddNewRemarksTap(e){
-    this.setData({
-      show: true
-  })
-  },
-
-
-  tapDialogButton(e) {
-    console.log(e)
-    const _btn = e.detail.item.text;
-    if (_btn == '取消') {
-    //   // 添加移除关注
-    //   this.concern_user();
-    // }
-      this.setData({
-        show: false,
-      })
-    }
-
-    if(_btn == '提交'){
-      let newRemarksList = this.data.remarksList;
-      newRemarksList.push({
-        content: this.data.newRemarks
-      });
-      console.log(newRemarksList);
-      this.setData({
-        remarksList: newRemarksList,
-        show: false
-      });
-
-    }
-  },
-
-  onRemarksConfirm(e){
-    console.log(e);
-    this.setData({
-      newRemarks: e.detail.value
-    });
-  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -91,12 +44,169 @@ Page({
     this.setData({
       customerNo: customerNo
     });
+
+    //获取客户的信息
+    let me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest'),
+        localTellerCode = wx.getStorageSync('tellerCode'),
+        localBusiDate = wx.getStorageSync('busiDate');
+
+    wx.request({
+      url: appInstance.globalData.globalPath + 'customerinfo',
+      data:{
+        sessionKeyDigest : localSessionKeyDigest,
+        tellerCode: localTellerCode,
+        busiDate: localBusiDate,
+        customerNo: customerNo
+      },
+      success(res){
+        me.setData({
+          customerName: res.data.info.customerName,
+          cellphoneNumber: res.data.info.cellphoneNumber,
+          sex: res.data.info.sex,
+          currentBusiDate: res.data.info.busiDateStr,
+          incomeList: res.data.info.incomeList,
+          cunKuanInfo: res.data.info.cunKuanInfoList,
+          daiKuanInfo: res.data.info.daiKuanInfoList,
+          otherInfo: res.data.info.otherInfoList
+        });
+      }
+    })
+
+    wx.request({
+      url: appInstance.globalData.globalPath + 'getremarks',
+      data:{
+        sessionKeyDigest : localSessionKeyDigest,
+        tellerCode: localTellerCode,
+        customerNo: customerNo
+      },
+      success(res){
+        me.setData({
+          remarksList: res.data.info
+        });
+      }
+    })
   },
 
+  //点击联系客户
   onContactCustomerBtnTap(e){
+    let me = this;
     wx.makePhoneCall({
-      phoneNumber: '15391257468',
+      phoneNumber: me.data.cellphoneNumber,
     })
+  },
+
+  //显示新增备注对话框
+  onAddNewRemarksTap(e){
+    this.setData({
+      show: true
+  })
+  },
+
+  //点击了新增备注下的按钮
+  tapDialogButton(e) {
+    const _btn = e.detail.item.text;
+    let me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest'),
+        localTellerCode = wx.getStorageSync('tellerCode');
+    if (_btn == '取消') {
+      this.setData({
+        show: false,
+      })
+    }
+
+    if(_btn == '提交'){
+      wx.request({
+        url: appInstance.globalData.globalPath + 'addremarks',
+        data:{
+          sessionKeyDigest : localSessionKeyDigest,
+          tellerCode: localTellerCode,
+          customerNo: me.data.customerNo,
+          remarks: me.data.newRemarks
+        },
+        success(res){
+          me.setData({
+            show: false
+          });
+          wx.request({
+            url: appInstance.globalData.globalPath + 'getremarks',
+            data:{
+              sessionKeyDigest : localSessionKeyDigest,
+              tellerCode: localTellerCode,
+              customerNo: me.data.customerNo
+            },
+            success(res){
+              me.setData({
+                remarksList: res.data.info
+              });
+            }
+          })
+        }
+      })
+    }
+  },
+
+  onRemarksConfirm(e){
+    this.setData({
+      newRemarks: e.detail.value
+    });
+  },
+
+  /**
+   * 切换业务周期，不更改柜员号 
+   */
+  bindDateChange: function(e) {
+    let pickedDate = e.detail.value,
+        me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest'),
+        localTellerCode = wx.getStorageSync('tellerCode');
+
+        wx.request({
+          url: appInstance.globalData.globalPath + 'customerinfo',
+          data:{
+            sessionKeyDigest : localSessionKeyDigest,
+            tellerCode: localTellerCode,
+            busiDate: pickedDate,
+            customerNo: me.data.customerNo
+          },
+          success(res){
+            if(res.data.flag === false){
+              me.setData({
+                currentBusiDate: '',
+                incomeList: [],
+                cunKuanInfo: [],
+                daiKuanInfo: [],
+                otherInfo: []
+              });
+            } else{
+              if(res.data.info != null && res.data.info != undefined){
+                me.setData({
+                  customerName: res.data.info.customerName,
+                  cellphoneNumber: res.data.info.cellphoneNumber,
+                  sex: res.data.info.sex,
+                  currentBusiDate: res.data.info.busiDateStr,
+                  incomeList: res.data.info.incomeList,
+                  cunKuanInfo: res.data.info.cunKuanInfoList,
+                  daiKuanInfo: res.data.info.daiKuanInfoList,
+                  otherInfo: res.data.info.otherInfoList
+                });
+              }
+              else{
+                me.setData({
+                  customerName: '',
+                  cellphoneNumber: '',
+                  sex: '',
+                  currentBusiDate:pickedDate,
+                  incomeList: [],
+                  cunKuanInfo: [],
+                  daiKuanInfo: [],
+                  otherInfo: []
+                });
+              }
+            }
+          }
+        })
+    
   },
 
   /**
@@ -106,40 +216,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
 
   /**
    * 用户点击右上角分享

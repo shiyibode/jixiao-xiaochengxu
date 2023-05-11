@@ -8,7 +8,7 @@
         <image src="{{avatarUrl}}" class="userinfo-avatar-image"></image>
       </view>
       <view class="user-info-title-text">
-        <text class="user-info-title-text-class-1">7801311</text>
+        <text class="user-info-title-text-class-1">{{tellerCode}}</text>
         <text class="user-info-title-text-class-2">日期：{{busiDate}}</text>
       </view>
       <view class="user-info-title-button" class="user-info-title-switch">
@@ -29,11 +29,11 @@
       </view>
       <view class="cunkuan-third">
         <view class="cunkuan-third-line"></view>
-        <text class="cunkuan-third-text">完成存款任务数{{cunKuanCompletion}}万元</text>
+        <text class="cunkuan-third-text">完成存款任务数 {{cunKuanCompletion}} 万元</text>
       </view>
     </view>
 
-    <view class="daikuan" hover-class="daikuan-hover" hover-stay-time="200">
+    <view class="daikuan" hover-class="daikuan-hover" hover-stay-time="200" bindtap="onSegTap" id="daikuan">
       <view class="cunkuan-first">
         <image src="../../utils/icon/money_yellow.png" class="cunkuan-first-money"></image>
         <text class="cunkuan-first-text">贷款绩效收入</text>
@@ -44,7 +44,7 @@
       </view>
       <view class="cunkuan-third">
         <view class="cunkuan-third-line"></view>
-        <text class="cunkuan-third-text">完成贷款利息数{{daiKuanCompletion}}万元</text>
+        <text class="cunkuan-third-text">完成贷款利息数 {{daiKuanCompletion}} 元</text>
       </view>
     </view>
   </view>
@@ -59,16 +59,21 @@
 
 
 
-  <mp-dialog title="权限申请" show="{{getUserInfoDialogShowFlag}}" bindbuttontap="tapDialogButton" >
-    <button open-type="chooseAvatar" bind:chooseavatar="getUserInfo" type="primary"> 获取头像昵称 </button>
+  <mp-dialog title="错误信息" show="{{getJixiaoErrorDialogShow}}" bindbuttontap="tapDialogButton" buttons="{{dialogButtons}}">
+    <text>{{getJixiaoErrorMessage}}</text>
   </mp-dialog>
 
-  <mp-actionSheet bindactiontap="actionSheetBtnClick" show="{{showActionsheet}}" actions="{{groups}}" title="请选择您的账号"></mp-actionSheet>
 
-  <picker mode="date" value="{{date}}" start="2023-01-01" end="2025-12-31" bindchange="bindDateChange">
-    <view class="picker">
+  <mp-actionSheet bindactiontap="actionSheetBtnClick" show="{{showActionsheet}}" actions="{{groups}}" title="请选择您的账号" show-cancel="{{false}}"></mp-actionSheet>
+
+  <!-- <view class="picker">
       <button type="primary" >切换业务周期</button>
-    </view>
-  </picker>
+    </view> -->
+
+  <view class="picker-class">
+    <picker mode="date" value="{{date}}" start="2023-01-01" end="2025-12-31" bindchange="bindDateChange" value="{{busiDate}}">
+      <view class="picker-btn">切换业务周期</view>
+    </picker>
+  </view>
 
 </view>

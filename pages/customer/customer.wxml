@@ -1,9 +1,9 @@
 <!--pages/customer/customer.wxml-->
 <view class="customer">
   <view class="first">
-    <image src="../../utils/icon/customer_single.png" class="first-image" wx:if="{{genderFlag === 0}}"></image>
-    <image src="../../utils/icon/customer_women.png" class="first-image" wx:if="{{genderFlag === 1}}"></image>
-    <text class="first-text">张三三</text>
+    <image src="../../utils/icon/customer_single.png" class="first-image" wx:if="{{sex === '1'}}"></image>
+    <image src="../../utils/icon/customer_women.png" class="first-image" wx:if="{{sex === '0'}}"></image>
+    <text class="first-text">{{customerName}}</text>
   </view>
 
   <view class="separator"></view>
@@ -16,51 +16,14 @@
     </view>
     <!-- <view class="delimiter"></view> -->
 
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">0.35以下利率存款</text>
-        <text class="second-content-account-number">122.5</text>
+    <view wx:for="{{incomeList}}" wx:key="performanceType" >
+      <view class="second-content">
+        <view class="second-content-account">
+          <text class="second-content-account-desc">{{item.performanceTypeDescribe}}</text>
+          <text class="second-content-account-number">{{item.totalIncome}}</text>
+        </view>
+        <view class="delimiter"></view>
       </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">0.35至1.35利率存款</text>
-        <text class="second-content-account-number">1809.23</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">1.35至3.0利率存款</text>
-        <text class="second-content-account-number">65.35</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">3.0以上利率存款</text>
-        <text class="second-content-account-number">2.5</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">千万元以下授信贷款</text>
-        <text class="second-content-account-number">655.2</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">政策性贷款</text>
-        <text class="second-content-account-number">25.7</text>
-      </view>
-      <view class="delimiter"></view>
     </view>
 
   </view>
@@ -72,84 +35,14 @@
     </view>
     <!-- <view class="delimiter"></view> -->
 
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">存款金额</text>
-        <text class="second-content-account-number">25584456.25</text>
+    <view wx:for="{{cunKuanInfo}}" wx:key="key">
+      <view class="second-content">
+        <view class="second-content-account">
+          <text class="second-content-account-desc">{{item.key}}</text>
+          <text class="second-content-account-number">{{item.value}}</text>
+        </view>
+        <view class="delimiter"></view>
       </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">存款账户数</text>
-        <text class="second-content-account-number">6个</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">不动户账户数</text>
-        <text class="second-content-account-number">2个</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">当日动账次数</text>
-        <text class="second-content-account-number">8次</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">当日支出金额</text>
-        <text class="second-content-account-number">280000.25</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">当日收入金额</text>
-        <text class="second-content-account-number">428548.00</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">当日三方交易次数</text>
-        <text class="second-content-account-number">12次</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-    
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">即将到期存款账户1</text>
-        <text class="second-content-account-number">***2332154</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">即将到期存款账户2</text>
-        <text class="second-content-account-number">***89556</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">当日存款利息支出</text>
-        <text class="second-content-account-number">885.12</text>
-      </view>
-      <view class="delimiter"></view>
     </view>
 
   </view>
@@ -161,53 +54,16 @@
       <text class="third-title-text">贷款</text>
     </view>
 
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">授信金额</text>
-        <text class="second-content-account-number">990000</text>
+    <view wx:for="{{daiKuanInfo}}" wx:key="key">
+      <view class="second-content">
+        <view class="second-content-account">
+          <text class="second-content-account-desc">{{item.key}}</text>
+          <text class="second-content-account-number">{{item.value}}</text>
+        </view>
+        <view class="delimiter"></view>
       </view>
-      <view class="delimiter"></view>
     </view>
 
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">贷款余额</text>
-        <text class="second-content-account-number">200000</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">客户五级分类状态</text>
-        <text class="second-content-account-number">0002</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">欠息金额</text>
-        <text class="second-content-account-number">5864.23</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">即将到期贷款1</text>
-        <text class="second-content-account-number">***566584</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">即将到期贷款2</text>
-        <text class="second-content-account-number">***568117</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
   </view>
 
   <view class="fourth">
@@ -216,44 +72,14 @@
       <text class="fourth-title-text">其他</text>
     </view>
 
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">开通手机银行</text>
-        <text class="second-content-account-number">是</text>
+    <view wx:for="{{otherInfo}}" wx:key="key">
+      <view class="second-content">
+        <view class="second-content-account">
+          <text class="second-content-account-desc">{{item.key}}</text>
+          <text class="second-content-account-number">{{item.value}}</text>
+        </view>
+        <view class="delimiter"></view>
       </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">开通网银</text>
-        <text class="second-content-account-number">否</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">开通社保卡</text>
-        <text class="second-content-account-number">是</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">绑定了三方支付</text>
-        <text class="second-content-account-number">是</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-desc">开通短信通</text>
-        <text class="second-content-account-number">否</text>
-      </view>
-      <view class="delimiter"></view>
     </view>
   </view>
 
@@ -263,26 +89,12 @@
       <text class="fourth-title-text">备注</text>
     </view>
 
-    <view wx:for="{{remarksList}}" class="second-content" wx:for-item="itemName">
+    <view wx:for="{{remarksList}}" class="second-content" wx:for-item="item" wx:key="id">
       <view class="second-content-account">
-        <text class="second-content-account-number">{{itemName.content}}</text>
+        <text class="second-content-account-number">{{item.remarks}}</text>
       </view>
       <view class="delimiter"></view>
     </view>
-
-    <!-- <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-number">2023年给客户送礼价值100元</text>
-      </view>
-      <view class="delimiter"></view>
-    </view>
-
-    <view class="second-content">
-      <view class="second-content-account">
-        <text class="second-content-account-number">该客户在政府上班，是个副科级干部，家住在康巴什皇庭俊景</text>
-      </view>
-      <view class="delimiter"></view>
-    </view> -->
 
     <view class="fourth-add-remarks" hover-class="fourth-add-remarks-hover" hover-stay-time="200" bindtap="onAddNewRemarksTap">
       <text class="fourth-add-remarks-text">+ 添加新备注</text>

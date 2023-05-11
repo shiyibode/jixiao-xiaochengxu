@@ -4,22 +4,20 @@ const app = getApp()
 
 Page({
   data: {
-    getUserInfoDialogShowFlag: false,
     avatarUrl: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132',
     showActionsheet: false,
-    groups: [
-        { text: '7801311', value: '7801311' },
-        { text: '103369', value: '103369' }
-    ],
-    busiDate: '2023-02-23',
-    date: null,
-    tellerName: '兰慧',
-    tellerCode: '7801311',
-    cunKuanIncome: 1220.56,
-    cunKuanCompletion: 2800,
-    daiKuanIncome: 4250.10,
-    daiKuanCompletion: 120.56,
-    buttons: [{text: '取消'}, {text: '确认'}],
+    groups: [],
+    getJixiaoErrorDialogShow: false,
+    getJixiaoErrorMessage: '',
+    dialogButtons: [{text: '确认'}],
+    busiDate: '',
+    tellerCode: '',
+    cunKuanIncome: 0,
+    cunKuanCompletion: 0,
+    daiKuanIncome: 0,
+    daiKuanCompletion: 0,
+
+
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.chooseAvatar')
@@ -37,27 +35,92 @@ Page({
   },
 
   /**
-   * 调用授权获取用户微信头像时的回调函数
+   * 切换柜员号
    */
-  getUserInfo(e){
-    this.updateAvatar(e.detail.avatarUrl);  //更新应用服务端数据库中用户的头像地址，下次登录时直接从数据库中取，不需要再让用户授权来获取头像地址
-    this.setData({
-      getUserInfoDialogShowFlag: false,
-      avatarUrl: e.detail.avatarUrl
-    });
-
-  },
-
   actionSheetBtnClick(e){
-    let selectedTeller = e.detail.value;
+    let selectedTeller = e.detail.value,
+        me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest');
+
+    wx.request({
+      url: app.globalData.globalPath + 'jixiaoinfo',
+      data:{
+        sessionKeyDigest : localSessionKeyDigest,
+        tellerCode: selectedTeller
+      },
+      success(res){
+        if(res.data.flag === true){
+          let info = res.data.info;
+          me.setData({
+            tellerCode: info.tellerCode,
+            avatarUrl: info.haveAvatarFlag?info.avatarUrl:me.data.avatarUrl,
+            busiDate: info.busiDateStr,
+            cunKuanIncome: info.cunKuanIncome,
+            cunKuanCompletion: info.cunKuanTaskCompletion,
+            daiKuanIncome: info.daiKuanIncome,
+            daiKuanCompletion: info.daiKuanInterestCompletion
+          });
+          wx.setStorageSync('tellerCode', info.tellerCode);
+          wx.setStorageSync('busiDate', info.busiDateStr);
+        }
+        else{
+          me.setData({
+            getJixiaoErrorDialogShow: true,
+            getJixiaoErrorMessage: res.data.message
+          });
+        }
+      },
+      fail(e){
+        console.log('获取用户绩效信息失败：' + e);
+      }
+    })
+
+
     this.setData({
       showActionsheet: false
     });
+
   },
+
+  /**
+   * 切换业务周期，不更改柜员号 
+   */
   bindDateChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date: e.detail.value
+    let pickedDate = e.detail.value,
+        me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest');
+
+    wx.request({
+      url: app.globalData.globalPath + 'jixiaoinfo',
+      data:{
+        sessionKeyDigest : localSessionKeyDigest,
+        tellerCode: me.data.tellerCode,
+        busiDate: pickedDate
+      },
+      success(res){
+        if(res.data.flag === true){
+          let info = res.data.info;
+          me.setData({
+            tellerCode: info.tellerCode,
+            avatarUrl: info.haveAvatarFlag?info.avatarUrl:me.data.avatarUrl,
+            busiDate: info.busiDateStr,
+            cunKuanIncome: info.cunKuanIncome,
+            cunKuanCompletion: info.cunKuanTaskCompletion,
+            daiKuanIncome: info.daiKuanIncome,
+            daiKuanCompletion: info.daiKuanInterestCompletion
+          });
+          wx.setStorageSync('busiDate', info.busiDateStr);
+        }
+        else{
+          me.setData({
+            getJixiaoErrorDialogShow: true,
+            getJixiaoErrorMessage: res.data.message
+          });
+        }
+      },
+      fail(e){
+        console.log('获取用户绩效信息失败：' + e);
+      }
     })
   },
 
@@ -71,83 +134,104 @@ Page({
     }
     if(id === 'daikuan'){
       wx.navigateTo({
-        url: '../jixiao/jixiao?id=daikuan',
+        url: '../daikuanjixiao/daikuanjixiao?id=daikuan',
       })
     }
   },
 
-  onLoad() {
-    
+  tapDialogButton(){
+    this.setData({
+      getJixiaoErrorDialogShow: false
+    });
   },
 
    /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    let me = this;
+    let me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest');
 
-    //判断app.js中的wx.login是否已经拿到openId，共等待3秒钟，如果等待3秒钟还没有拿到则重新登录
-    //如果拿到了openId，就使用openId去应用服务端获取用户的avatarUrl地址
-    if(app.globalData.openId === null || app.globalData.openId === undefined){
-      let flag = true;
-      setTimeout(res=>{
-        if(app.globalData.openId !== null && app.globalData.openId !== undefined) flag = false;
-        if(flag){
-          setTimeout(res2=>{
-            if(app.globalData.openId === null || app.globalData.openId === undefined){
-              app.login();
-            }
-            else{
-              me.getAvatar();
-            }
-          },2000);
-        }
-        else{
-          me.getAvatar();
-        }
-      },1000);
-    }
-    else{
-      me.getAvatar();
-    }
-    
-  },
-
-  /**
-   * 根据openId去应用服务器取avatarUrl
-   * 如果服务器端未保存该openId对应的avatarUrl，就显示授权获取头像的窗口
-   */
-  getAvatar(){
-    let me = this;
     wx.request({
-      url: app.globalData.globalPath + 'haveavatar',
-      data:{openId : app.globalData.openId},
+      url: app.globalData.globalPath + 'jixiaoinfo',
+      data:{sessionKeyDigest : localSessionKeyDigest},
       success(res){
-        if(res.data.haveAvatar === true){
+        if(res.data.flag === true){
+          let info = res.data.info;
           me.setData({
-            avatarUrl: res.data.url
+            tellerCode: info.tellerCode,
+            avatarUrl: info.haveAvatarFlag?info.avatarUrl:me.data.avatarUrl,
+            busiDate: info.busiDateStr,
+            cunKuanIncome: info.cunKuanIncome,
+            cunKuanCompletion: info.cunKuanTaskCompletion,
+            daiKuanIncome: info.daiKuanIncome,
+            daiKuanCompletion: info.daiKuanInterestCompletion
           });
+          wx.setStorageSync('tellerCode', info.tellerCode);
+          wx.setStorageSync('busiDate', info.busiDateStr);
+
+          let tellerActionSheetGroups = [];
+          for(var teller of info.tellerList){
+            let tmp = {
+              text: teller,
+              value: teller
+            }
+            tellerActionSheetGroups.push(tmp)
+          }
+          me.setData({
+            groups: tellerActionSheetGroups,
+          });
+
+          if(!info.haveAvatarFlag){
+            me.getAvatar();
+          }
         }
         else{
           me.setData({
-            getUserInfoDialogShowFlag: true
+            getJixiaoErrorDialogShow: true,
+            getJixiaoErrorMessage: res.data.message
           });
         }
       },
       fail(e){
-        console.log('获取用户openId失败：' + e);
+        console.log('获取用户绩效信息失败：' + e);
       }
     })
+    
+  },
+
+  /**
+   * 服务器端未保存该sessionKeyDigest对应的avatarUrl，去微信后台获取，同时更新后台
+   */
+  getAvatar(){
+    let me = this;
+
+    wx.qy.getAvatar ({
+      success: function(res) {
+        var avatar = res.avatar;
+        me.setData({
+          avatarUrl: avatar
+        });
+        me.updateAvatar(avatar);
+      },
+      fail: function(res) {
+        console.log('获取avatarUrl失败');
+        console.log(res.fail_reason)
+      }
+    })
+    
   },
 
   /**
    * 更新服务端保存的头像地址
    */
   updateAvatar(avatarUrl){
+    let localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest');
+
     wx.request({
       url: app.globalData.globalPath + 'updateavatar',
       data:{
-        openId: app.globalData.openId,
+        sessionKeyDigest: localSessionKeyDigest,
         avatarUrl: avatarUrl
       },
       success(res){
@@ -155,7 +239,6 @@ Page({
       }
     })
   }
-
 
 
 

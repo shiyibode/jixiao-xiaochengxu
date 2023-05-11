@@ -1,11 +1,13 @@
 {
-  "entryPagePath": "pages/index/index",
+  "entryPagePath": "pages/login/login",
   "pages": [
     "pages/index/index",
     "pages/jixiao/jixiao",
     "pages/kaohe/kaohe",
     "pages/kehu/kehu",
-    "pages/customer/customer"
+    "pages/customer/customer",
+    "pages/login/login",
+    "pages/daikuanjixiao/daikuanjixiao"
   ],
   "window": {
     "backgroundTextStyle": "light",

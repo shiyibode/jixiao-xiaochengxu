@@ -3,133 +3,53 @@
   <mp-tabbar list="{{tabList}}" ext-class='.background-color' bindchange='onTabSwitch'></mp-tabbar>
   <view class="line"></view>
 
-  <view wx:if="{{tabIndex === 0}}" class='employee'>
-    <view class="employee-plan">
-      <view class="employee-plan-title">
-        <view class="employee-plan-title-image-box">
-          <image src="../../utils/icon/keypoint.png" class="employee-plan-title-image"></image>
+
+  <view wx:if="{{tabIndex === 0}}">
+
+
+      <view class="employee-plan" wx:for="{{orgPlanList}}" wx:key="rootPlanId">
+        <view class="employee-plan-title">
+          <view class="employee-plan-title-image-box">
+            <image src="../../utils/icon/keypoint.png" class="employee-plan-title-image"></image>
+          </view>
+          <text class="employee-plan-text">{{item.rootPlanName}}-{{item.subjectCode}}</text>
         </view>
-        <text class="employee-plan-text">春天行动方案</text>
+        <view wx:for="{{item.keyPointList}}" wx:for-item="keyItem" wx:key="id">
+          <view>
+            <view class="employee-plan-list">
+            <view class="employee-plan-list-content">
+              <text class="employee-plan-list-content-1">{{keyItem.name}}</text>
+              <text class="employee-plan-list-content-2">目标任务数：  <text class="employee-plan-list-content-4">{{keyItem.taskAmount}}</text></text>
+              <text class="employee-plan-list-content-2">实际完成数：  <text class="employee-plan-list-content-5">{{keyItem.completeAmount}}</text></text>
+              <text class="employee-plan-list-content-2">进度更新日期: <text class="employee-plan-list-content-5">{{keyItem.taskUpdateDateStr}}</text></text>
+            </view>
+            <view class="employee-plan-list-term">
+              <text class="employee-plan-list-term-text"><text class="{{keyItem.completeFlag?'complete-text':'un-complete-text'}}">{{keyItem.remainAmount}}</text></text>
+              <view class="complete-flag-text"><text class="{{keyItem.completeFlag?'complete-text':'un-complete-text'}}">{{keyItem.completeFlag?'完成':'未完成'}}</text></view>
+            </view>
+            </view>
+            <view class="delimiter-box">
+              <view class="delimiter"></view>
+            </view>
+          </view>
+        </view>
+
       </view>
-      <view>
-        <view class="employee-plan-list">
-        <view class="employee-plan-list-content">
-          <text class="employee-plan-list-content-1">银行卡活卡率</text>
-          <text class="employee-plan-list-content-2">目标任务数：  <text class="employee-plan-list-content-4">82.5%</text></text>
-          <text class="employee-plan-list-content-2">实际完成数：  <text class="employee-plan-list-content-5">80.4%</text></text>
-        </view>
-        <view class="employee-plan-list-term">
-          <text class="employee-plan-list-term-text">2022Y08M</text>
-        </view>
-        </view>
-        <view class="delimiter-box">
-          <view class="delimiter"></view>
-        </view>
-      </view>
-
-
-      <view>
-        <view class="employee-plan-list">
-        <view class="employee-plan-list-content">
-          <text class="employee-plan-list-content-1">净增社保卡张数及活卡率</text>
-          <text class="employee-plan-list-content-2">目标任务数：  <text class="employee-plan-list-content-4">82.5%</text></text>
-          <text class="employee-plan-list-content-2">实际完成数：  <text class="employee-plan-list-content-5">80.4%</text></text>
-        </view>
-        <view class="employee-plan-list-term">
-          <text class="employee-plan-list-term-text">2022Y08M</text>
-        </view>
-        </view>
-        <view class="delimiter-box">
-          <view class="delimiter"></view>
-        </view>
-      </view>
-
-
-      <view>
-        <view class="employee-plan-list">
-        <view class="employee-plan-list-content">
-          <text class="employee-plan-list-content-1">微信银行客户增长数</text>
-          <text class="employee-plan-list-content-2">目标任务数：  <text class="employee-plan-list-content-4">15</text></text>
-          <text class="employee-plan-list-content-2">实际完成数：  <text class="employee-plan-list-content-5">5</text></text>
-        </view>
-        <view class="employee-plan-list-term">
-          <text class="employee-plan-list-term-text">2022Y08M</text>
-        </view>
-        </view>
-        <view class="delimiter-box">
-          <view class="delimiter"></view>
-        </view>
-      </view>
-
-    </view>
-    <!-- plan -->
-    <view class="employee-plan">
-      <view class="employee-plan-title">
-        <view class="employee-plan-title-image-box">
-          <image src="../../utils/icon/keypoint.png" class="employee-plan-title-image"></image>
-        </view>
-        <text class="employee-plan-text">丰收行动考核方案</text>
-      </view>
-      <view>
-        <view class="employee-plan-list">
-        <view class="employee-plan-list-content">
-          <text class="employee-plan-list-content-1">活期存款日均余额占比</text>
-          <text class="employee-plan-list-content-2">目标任务数：  <text class="employee-plan-list-content-4">55.8%</text></text>
-          <text class="employee-plan-list-content-2">实际完成数：  <text class="employee-plan-list-content-5">80.4%</text></text>
-        </view>
-        <view class="employee-plan-list-term">
-          <text class="employee-plan-list-term-text">2022Y08M</text>
-        </view>
-        </view>
-        <view class="delimiter-box">
-          <view class="delimiter"></view>
-        </view>
-      </view>
-
-
-      <view>
-        <view class="employee-plan-list">
-        <view class="employee-plan-list-content">
-          <text class="employee-plan-list-content-1">涉农贷款占比</text>
-          <text class="employee-plan-list-content-2">目标任务数：  <text class="employee-plan-list-content-4">82.5%</text></text>
-          <text class="employee-plan-list-content-2">实际完成数：  <text class="employee-plan-list-content-5">80.4%</text></text>
-        </view>
-        <view class="employee-plan-list-term">
-          <text class="employee-plan-list-term-text">2022Y08M</text>
-        </view>
-        </view>
-        <view class="delimiter-box">
-          <view class="delimiter"></view>
-        </view>
-      </view>
-
-
-      <view>
-        <view class="employee-plan-list">
-        <view class="employee-plan-list-content">
-          <text class="employee-plan-list-content-1">农牧户授信客户数</text>
-          <text class="employee-plan-list-content-2">目标任务数：  <text class="employee-plan-list-content-4">15</text></text>
-          <text class="employee-plan-list-content-2">实际完成数：  <text class="employee-plan-list-content-5">5</text></text>
-        </view>
-        <view class="employee-plan-list-term">
-          <text class="employee-plan-list-term-text">2022Y08M</text>
-        </view>
-        </view>
-        <view class="delimiter-box">
-          <view class="delimiter"></view>
-        </view>
-      </view>
-    </view>
     
   
-  
-  
   </view>
+
+
+
 
 
   <view wx:if="{{tabIndex === 1}}">
-    <view>机构指标项</view>
+    
+    
+    <view>员工指标</view>
+  
   
   </view>
+
 
 </view>
