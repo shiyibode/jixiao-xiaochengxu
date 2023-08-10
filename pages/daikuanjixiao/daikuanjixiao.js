@@ -15,7 +15,8 @@ Page({
     loadingFlag: true,
     reachBottomFlag: false,
     loadAllFlag: false,
-    cunDaiKuanFlag: ''  //存贷款标志: cunkuan-存款  daikuan-贷款
+    cunDaiKuanFlag: '',  //存贷款标志: cunkuan-存款  daikuan-贷款
+    localTellerCode: ''
   },
 
   /**
@@ -30,6 +31,10 @@ Page({
         localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest'),
         localTellerCode = wx.getStorageSync('tellerCode'),
         localBusiDate = wx.getStorageSync('busiDate');
+        
+    this.setData({
+      localTellerCode: localTellerCode
+    });
 
 
     if(options.id === 'daikuan'){

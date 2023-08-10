@@ -65,4 +65,12 @@
     <view wx:if="{{loadAllFlag}}">已全部加载完成</view>
   </view>
 
+  <view style="position: fixed;top: -10vh; left:-100vw;width: 250vw; height: 100vh; z-index: -999;transform: rotate(-45deg);">
+    <block wx:for="{{30}}" wx:key="*this">
+      <view style="color:rgb(14, 13, 13); margin:30rpx; padding:20rpx; opacity: 0.25;">
+      {{localTellerCode + '　　' + localTellerCode}}　　　　　　{{localTellerCode + '　　' + localTellerCode}}　　　　　{{localTellerCode + '　　' + localTellerCode}}　　　　{{localTellerCode + '　　' + localTellerCode}}
+      </view>
+    </block>
+  </view>
+
 </view>

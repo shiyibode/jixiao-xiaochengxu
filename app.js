@@ -13,6 +13,31 @@ App({
 
     //企业微信登录
     app.qyLogin();
+
+    wx.onUserCaptureScreen(function (res) {
+      wx.showModal({
+        content:'您的截屏操作已被后台记录，客户信息泄露将严肃追责',
+        showCancel:false
+      })
+
+      let localTellerCode = wx.getStorageSync('tellerCode'),
+          localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest');
+      wx.request({
+        url: app.globalData.globalPath + 'capturescreen',
+        data:{
+          sessionKeyDigest : localSessionKeyDigest,
+          tellerCode: localTellerCode
+        },
+        success(res){
+          console.log('截屏后返回的信息');
+          console.log(res);
+        }
+      })
+
+    })
+
+
+
   },
 
   login(){

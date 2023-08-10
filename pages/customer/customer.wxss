@@ -13,7 +13,6 @@
 }
 
 .first-text{
-  /* padding-top: 20rpx; */
   font-size: 60rpx;
 }
 
