@@ -21,7 +21,8 @@ Page({
     expireDaiKuanList: [],
     overdueLoanCustomer: [],
     newOpenAccount: [],
-    avatarUrl: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132'
+    avatarUrl: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132',
+    localTellerCode: ''
   },
 
   /**
@@ -103,7 +104,8 @@ Page({
 
     me.setData({
       busiDate: localBusiDate,
-      tellerCode: localTellerCode
+      tellerCode: localTellerCode,
+      localTellerCode: localTellerCode
     });
 
     //即将到期的存款列表

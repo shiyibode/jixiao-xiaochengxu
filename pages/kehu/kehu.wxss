@@ -1,6 +1,5 @@
 /* pages/kehu/kehu.wxss */
 .kehu{
-  background-color: #ecf0f1;
   padding-bottom: 180rpx;
 }
 
@@ -59,7 +58,6 @@
 }
 
 .content{
-  background-color: white;
 }
 
 .one{

@@ -33,7 +33,8 @@ Page({
     incomeList: [],
     cunKuanInfo: [],
     daiKuanInfo: [],
-    otherInfo: []
+    otherInfo: [],
+    localTellerCode: ''
   },
 
   /**
@@ -42,7 +43,7 @@ Page({
   onLoad(options) {
     let customerNo = options.customerno;
     this.setData({
-      customerNo: customerNo
+      customerNo: customerNo,
     });
 
     //获取客户的信息
@@ -50,6 +51,9 @@ Page({
         localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest'),
         localTellerCode = wx.getStorageSync('tellerCode'),
         localBusiDate = wx.getStorageSync('busiDate');
+    this.setData({
+      localTellerCode: localTellerCode
+    });
 
     wx.request({
       url: appInstance.globalData.globalPath + 'customerinfo',
