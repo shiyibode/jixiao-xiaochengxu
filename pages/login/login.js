@@ -15,15 +15,13 @@ Page({
   onLoad(options) {
     let scene = options.scene;
     if(scene === undefined) scene = 0;
-    console.log('scene为: '+scene);
 
     //判断是否已经登录
     wx.qy.checkSession({
       success:function(){
-        console.log('有效')
         let localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest');
         // if(localSessionKeyDigest === null || localSessionKeyDigest === undefined || localSessionKeyDigest === ''){
-          console.log('session有效，但是仍需要发起登录请求')
+          // console.log('session有效，但是仍需要发起登录请求')
           wx.qy.login({
             success: function(res) {
               if (res.code) {
@@ -58,7 +56,6 @@ Page({
         // }
       },
       fail: function(){
-        console.log('无效');
         wx.qy.login({
           success: function(res) {
             if (res.code) {

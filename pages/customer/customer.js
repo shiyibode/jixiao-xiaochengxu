@@ -9,6 +9,7 @@ Page({
     currentBusiDate: '',
     customerNo: null,
     show: false,
+    deleteRemarksShow: false,
     buttons: [
         {
             type: 'default',
@@ -23,9 +24,18 @@ Page({
             value: 1
         }
     ],
-    remarksList:[
-      
+    deleteButtons: [
+      {
+          type: 'default',
+          text: '取消',
+          value: 0
+      },{
+          type: 'primary',
+          text: '确定',
+          value: 1
+      }
     ],
+    remarksList:[],
     newRemarks: null,
     customerName: '',
     sex: '',
@@ -34,7 +44,8 @@ Page({
     cunKuanInfo: [],
     daiKuanInfo: [],
     otherInfo: [],
-    localTellerCode: ''
+    localTellerCode: '',
+    selectedRemarksId: null
   },
 
   /**
@@ -119,7 +130,18 @@ Page({
       })
     }
 
+    console.log(me.data.newRemarks)
+
     if(_btn == '提交'){
+      let remarks = me.data.newRemarks
+      if(remarks === null || remarks === undefined || remarks === '' || remarks === 'null'){
+        wx.showToast({
+          title: '备注内容不能为空',
+          icon: 'error',
+          duration: 1500
+        })
+        return
+      }
       wx.request({
         url: appInstance.globalData.globalPath + 'addremarks',
         data:{
@@ -211,6 +233,67 @@ Page({
           }
         })
     
+  },
+
+  /**
+   * 长按备注
+   */
+  bindRemarksLongPress(e){
+    let me = this;
+
+    let rid = e.currentTarget.dataset.rid;
+    if (rid !== null && rid !== undefined && rid !== "") {  
+      me.setData({
+        deleteRemarksShow: true,
+        selectedRemarksId: rid
+      })
+    }
+  },
+
+  /**
+   * 点击了删除备注提醒框的按钮 
+   */
+  tapDeleteRemarksButton(e) {
+    const _btn = e.detail.item.text;
+    let me = this,
+        localSessionKeyDigest = wx.getStorageSync('sessionKeyDigest'),
+        localTellerCode = wx.getStorageSync('tellerCode');
+    if (_btn == '取消') {
+      this.setData({
+        deleteRemarksShow: false,
+        selectedRemarksId: null
+      })
+    }
+
+    if(_btn == '确定'){
+      wx.request({
+        url: appInstance.globalData.globalPath + 'deleteremarks',
+        data:{
+          sessionKeyDigest : localSessionKeyDigest,
+          tellerCode: localTellerCode,
+          id: me.data.selectedRemarksId
+        },
+        success(res){
+          me.setData({
+            deleteRemarksShow: false,
+            selectedRemarksId: null
+          });
+          wx.request({
+            url: appInstance.globalData.globalPath + 'getremarks',
+            data:{
+              sessionKeyDigest : localSessionKeyDigest,
+              tellerCode: localTellerCode,
+              customerNo: me.data.customerNo
+            },
+            success(res){
+              me.setData({
+                remarksList: res.data.info
+              });
+            }
+          })
+        }
+      })
+    }
   },
 
   /**

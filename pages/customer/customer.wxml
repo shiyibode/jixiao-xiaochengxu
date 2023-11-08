@@ -90,7 +90,7 @@
     </view>
 
     <view wx:for="{{remarksList}}" class="second-content" wx:for-item="item" wx:key="id">
-      <view class="second-content-account">
+      <view class="second-content-account" bind:longpress="bindRemarksLongPress" data-rid="{{item.id}}">
         <text class="second-content-account-number">{{item.remarks}}</text>
       </view>
       <view class="delimiter"></view>
@@ -130,6 +130,15 @@
       ext-class=""
       >
       <textarea placeholder="请输入您对该客户的备注信息" class="remarks" fixed="{{true}}" bindinput="onRemarksConfirm"></textarea>
+    </mp-dialog>
+
+    <mp-dialog 
+      title="确定删除本备注？" 
+      show="{{deleteRemarksShow}}" 
+      buttons="{{deleteButtons}}"
+      bindbuttontap="tapDeleteRemarksButton"
+      ext-class=""
+      >
     </mp-dialog>
 
   </view>

@@ -23,7 +23,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options.id);
     this.setData({
       cunDaiKuanFlag: options.id
     });
@@ -105,7 +104,6 @@ Page({
     let phoneNumber = e.currentTarget.dataset.phonenumber;
     
     if(phoneNumber.length === 11){
-      console.log(phoneNumber);
       wx.makePhoneCall({
         phoneNumber: phoneNumber,
       })
@@ -122,7 +120,6 @@ Page({
         localTellerCode = wx.getStorageSync('tellerCode'),
         localBusiDate = wx.getStorageSync('busiDate');
 
-    console.log('触底了,总页数: '+me.data.totalPage);
     if(me.data.cunDaiKuanFlag === 'daikuan'){
       let currentPage = this.data.currentPageNo + 1;  //第一个页面已在onReady中加载，触底只需要从第二个页面开始加载
       if(currentPage > me.data.totalPage){
@@ -135,7 +132,6 @@ Page({
           reachBottomFlag: true,
           loadingFlag: true
         });
-        console.log('获取页面：'+ currentPage);
         //获取客户列表
         wx.request({
           url: appInstance.globalData.globalPath + 'daikuancustomerlist',

@@ -14,6 +14,7 @@ App({
     //企业微信登录
     app.qyLogin();
 
+    //向后台记录用户截屏的操作
     wx.onUserCaptureScreen(function (res) {
       wx.showModal({
         content:'您的截屏操作已被后台记录，客户信息泄露将严肃追责',
@@ -29,8 +30,12 @@ App({
           tellerCode: localTellerCode
         },
         success(res){
-          console.log('截屏后返回的信息');
-          console.log(res);
+          if(res.data != undefined && res.data.flag == false && res.data.message != undefined){
+            wx.showModal({
+              title: '错误',
+              content: res.data.message
+            })
+          }
         }
       })
 

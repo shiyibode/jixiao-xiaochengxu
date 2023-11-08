@@ -44,10 +44,26 @@ Page({
           busiDate: localBusiDate
         },
         success(res){
-          me.setData({
-            cunKuanCustomerCnt: res.data.info.cunKuanCustomerCnt,
-            cunKuanAmount: res.data.info.cunKuanTaskCompletion
-          });
+          if(res.data != undefined && res.data.flag == false){
+            wx.showModal({
+              title: '错误',
+              content: res.data.message,
+              showCancel: false,
+              complete: (res) => {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: '/pages/login/login',
+                  })
+                }
+              }
+            })
+          }
+          else{
+            me.setData({
+              cunKuanCustomerCnt: res.data.info.cunKuanCustomerCnt,
+              cunKuanAmount: res.data.info.cunKuanTaskCompletion
+            });
+          }
         }
       })
 
@@ -61,7 +77,6 @@ Page({
           pageNo: me.data.currentPageNo
         },
         success(res){
-          console.log(res)
           me.setData({
             customerList: res.data.customerList,
             totalPage: res.data.customerTotalPage
@@ -103,7 +118,6 @@ Page({
     let phoneNumber = e.currentTarget.dataset.phonenumber;
     
     if(phoneNumber != null && phoneNumber.length === 11){
-      console.log(phoneNumber);
       wx.makePhoneCall({
         phoneNumber: phoneNumber,
       })
@@ -120,7 +134,6 @@ Page({
         localTellerCode = wx.getStorageSync('tellerCode'),
         localBusiDate = wx.getStorageSync('busiDate');
 
-    console.log('触底了,总页数: '+me.data.totalPage);
     if(me.data.cunDaiKuanFlag === 'cunkuan'){
       let currentPage = this.data.currentPageNo + 1;  //第一个页面已在onReady中加载，触底只需要从第二个页面开始加载
       if(currentPage > me.data.totalPage){
@@ -133,7 +146,6 @@ Page({
           reachBottomFlag: true,
           loadingFlag: true
         });
-        console.log('获取页面：'+ currentPage);
         //获取客户列表
         wx.request({
           url: appInstance.globalData.globalPath + 'cunkuancustomerlist',
@@ -144,11 +156,27 @@ Page({
             pageNo: currentPage
           },
           success(res){
-            let newCustomerList = me.data.customerList.concat(res.data.customerList);
-            me.setData({
-              customerList: newCustomerList,
-              loadingFlag: false
-            });
+            if(res.data != undefined && res.data.flag == false){
+              wx.showModal({
+                title: '错误',
+                content: res.data.message,
+                showCancel: false,
+                complete: (res) => {
+                  if (res.confirm) {
+                    wx.navigateTo({
+                      url: '/pages/login/login',
+                    })
+                  }
+                }
+              })
+            }
+            else{
+              let newCustomerList = me.data.customerList.concat(res.data.customerList);
+              me.setData({
+                customerList: newCustomerList,
+                loadingFlag: false
+              });
+            }
           }
         })
       }
